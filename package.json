@@ -1,0 +1,27 @@
+{
+	"name": "onelink-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon server.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ali-moussavi/OneLink-backend.git"
+	},
+	"author": "Ali Moussavi",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ali-moussavi/OneLink-backend/issues"
+	},
+	"homepage": "https://github.com/ali-moussavi/OneLink-backend#readme",
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"mongodb": "^3.6.3",
+		"mongoose": "^5.11.8",
+		"nodemon": "^2.0.6"
+	}
+}
