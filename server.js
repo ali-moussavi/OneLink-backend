@@ -1,23 +1,27 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const db = require("./config/db");
+const dotenv = require("dotenv");
+const cardRoutes = require("./routes/cardRoutes");
+const errorMiddleware = require("./middleware/errorMiddleware");
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
-app.get("/api/:cardUrlId", (req, res) => {
-	const urlId = req.params.cardUlrId;
-});
+app.use("/api/cards/", cardRoutes);
 
-let pass = encodeURIComponent("JWzWGUw38qz2b5A");
+app.use(errorMiddleware.notFound);
 
-mongoose
-	.connect(
-		`mongodb+srv://smapro:${pass}@cluster0.9df98.mongodb.net/<dbname>?retryWrites=true&w=majority`
-	)
+app.use(errorMiddleware.errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+db.connectDB()
 	.then(() => {
-		app.listen(8080, () => {
-			console.log("Server running on port 8080");
+		app.listen(PORT, () => {
+			console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 		});
 	})
 	.catch((err) => {
