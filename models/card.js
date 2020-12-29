@@ -28,6 +28,7 @@ const cardSchema = new mongoose.Schema({
 	instagram: String,
 	twitter: String,
 	youtube: String,
+	linkedIn: String,
 	relatedLinks: [
 		{
 			name: { type: String, required: true },
@@ -36,6 +37,8 @@ const cardSchema = new mongoose.Schema({
 	],
 	description: String,
 	email: String,
+	locationAddress: String,
+	locationLink: String,
 });
 
 module.exports = mongoose.model("Card", cardSchema);

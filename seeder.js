@@ -41,6 +41,9 @@ const addUsersandCard = async () => {
 			],
 			description: "I am a web developer specialized in the mern stack",
 			email: "j.smith@gmail.com",
+			locationAddress: "19 Yonge Street, Toronto",
+			locationLink: "https://goo.gl/maps/aMTBbUqwbd2wzZL67",
+			linkedIn: "https://www.linkedin.com/in/ali-moussavi/",
 		});
 		await createdCard.save();
 		console.log("data added to database");
