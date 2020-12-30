@@ -10,9 +10,6 @@ const userSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 	cards: [
 		{
-			urlId: { type: String, required: true },
-			name: { type: String, required: true },
-			picture: String,
 			cardId: { type: mongoose.Schema.Types.ObjectId, required: true },
 		},
 	],
