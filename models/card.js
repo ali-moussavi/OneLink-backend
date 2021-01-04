@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-const linkSchema = new mongoose.Schema({
-	name: { type: String, required: true },
-	url: { type: String, required: true },
-});
-
 const cardSchema = new mongoose.Schema({
 	owner: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +15,6 @@ const cardSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	title: { type: String, required: true },
 	views: { type: Number, default: 0 },
-	location: String,
 	picture: String,
 	whatsApp: Number,
 	telegramId: String,
@@ -29,7 +23,7 @@ const cardSchema = new mongoose.Schema({
 	twitter: String,
 	youtube: String,
 	linkedIn: String,
-	relatedLinks: [
+	links: [
 		{
 			name: { type: String, required: true },
 			url: { type: String, required: true },

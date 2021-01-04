@@ -32,11 +32,7 @@ const createNewCard = asyncHandler(async (req, res) => {
 	const addedCard = await Card.create({ ...req.body, owner: req.user._id });
 
 	if (addedCard) {
-		const { urlId, name, picture } = addedCard;
 		const cardInfo = {
-			urlId,
-			name,
-			picture,
 			cardId: addedCard._id,
 		};
 		const user = await User.findOneAndUpdate(
@@ -81,7 +77,7 @@ const deleteCard = asyncHandler(async (req, res) => {
 			await Card.deleteOne({ _id: req.params.cardid });
 			await User.updateOne(
 				{ _id: req.user._id },
-				{ $pullAll: { cards: [{ cardId: req.params.cardid }] } }
+				{ $pull: { cards: { cardId: req.params.cardid } } }
 			);
 			res.json({ message: "Deleted successfuly" });
 		} else {
@@ -94,10 +90,23 @@ const deleteCard = asyncHandler(async (req, res) => {
 	}
 });
 
+const cardUrlExists = asyncHandler(async (req, res) => {
+	await Card.exists({ urlId: req.params.urlid }, function (err, result) {
+		if (err) {
+			console.log(err);
+			res.status(404);
+			throw new Error("Could not perform task");
+		} else {
+			res.json({ result: result });
+		}
+	});
+});
+
 module.exports = {
 	getCardById,
 	getCardByUrlId,
 	editCard,
 	deleteCard,
 	createNewCard,
+	cardUrlExists,
 };

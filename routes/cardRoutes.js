@@ -22,13 +22,18 @@ router.route("/cardbyid/:cardid").get(cardControllers.getCardById);
 router.route("/edit/:cardid").put(authMiddleware.protect, cardControllers.editCard);
 
 //@desc create a new card
-//@route  put /api/cards/new
+//@route  post /api/cards/new
 //@access Private
 router.route("/new").post(authMiddleware.protect, cardControllers.createNewCard);
 
 //@desc delete card
-//@route  put /api/cards/delete.:cardid
+//@route  delete /api/cards/delete.:cardid
 //@access Private
 router
 	.route("/delete/:cardid")
 	.delete(authMiddleware.protect, cardControllers.deleteCard);
+
+//@desc check to see if urlId exists in database
+//@route  GET /api/cards/idexists/:urlid
+//@access Public
+router.route("/idexists/:urlid").get(cardControllers.cardUrlExists);

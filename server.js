@@ -1,9 +1,11 @@
 const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
 const db = require("./config/db");
 const dotenv = require("dotenv");
 const cardRoutes = require("./routes/cardRoutes");
 const userRoutes = require("./routes/userRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
 dotenv.config();
@@ -15,7 +17,9 @@ app.use(bodyParser.json());
 
 app.use("/api/cards/", cardRoutes);
 app.use("/api/users/", userRoutes);
+app.use("/api/upload/", uploadRoutes);
 
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(errorMiddleware.notFound);
 
 app.use(errorMiddleware.errorHandler);
