@@ -19,6 +19,13 @@ app.use("/api/cards/", cardRoutes);
 app.use("/api/users/", userRoutes);
 app.use("/api/upload/", uploadRoutes);
 
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join("public")));
+	app.get("*", (req, res, next) => {
+		res.sendFile(path.resolve(__dirname, "public", "index.html"));
+	});
+}
+
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(errorMiddleware.notFound);
 
